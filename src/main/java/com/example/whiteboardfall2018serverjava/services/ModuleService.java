@@ -30,8 +30,8 @@ public class ModuleService {
 	public List<Module> findModulesForCourse(@PathVariable("courseId") long courseId,HttpSession session) {
 		Course course = courseService.findCourseById(courseId,session);
 		if (modules.isEmpty()) {
-			Module m1 = new Module(System.currentTimeMillis() , "Module 1");
-			Module m2 = new Module(System.currentTimeMillis() , "Module 2");
+			Module m1 = new Module((int) System.currentTimeMillis() , "Module 1");
+			Module m2 = new Module((int) System.currentTimeMillis() , "Module 2");
 			modules.add(m1);
 			/*LessonService l1 = new LessonService();
 			l1.findLessonsForModule(m1.getId(), session);
@@ -53,7 +53,7 @@ public class ModuleService {
 		Course course = courseService.findCourseById(courseId,session);
 		modules = course.getModules();
 		
-		module.setId(System.currentTimeMillis());
+		module.setId((int)System.currentTimeMillis());
 		modules.add(module);
 		return modules;
 	}
@@ -77,7 +77,7 @@ public class ModuleService {
 
 	/* Updates Module whose id is mid */
 	@PutMapping("/api/module/{mid}")
-	public Module updateModule(@PathVariable("mid") long mid, @RequestBody Module module, HttpSession session) {
+	public Module updateModule(@PathVariable("mid") int mid, @RequestBody Module module, HttpSession session) {
 
 		List<Course> courses = courseService.findAllCourses(session);
 		int ctr = 0;

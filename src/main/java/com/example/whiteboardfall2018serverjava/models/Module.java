@@ -3,16 +3,35 @@ package com.example.whiteboardfall2018serverjava.models;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+@Entity
 public class Module {
-	  private long id;
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	  private int id;
 	  private String title;
+	  
+	  @ManyToOne
+	  @JsonIgnore
+	  private Course course;
+	  
+	  @OneToMany(mappedBy="module",cascade=CascadeType.ALL,orphanRemoval=true)
 	  private List<Lesson> lessons = new ArrayList<Lesson>();
 	  
-	public Module(long i, String string) {
+	public Module(int i, String string) {
 		id = i; title = string;
 	}
 	public Module() {}
-	public long getId() {
+	public int getId() {
 		return id;
 	}
 	public List<Lesson> getLessons() {
@@ -21,7 +40,7 @@ public class Module {
 	public void setLessons(List<Lesson> lessons) {
 		this.lessons = lessons;
 	}
-	public void setId(long id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 	public String getTitle() {

@@ -38,8 +38,8 @@ public class TopicService {
 		topics = lesson.getTopics();
 		if(topics.isEmpty())
 		{
-			Topic t1 = new Topic(System.currentTimeMillis(),"Topic a");
-			Topic t2 = new Topic(System.currentTimeMillis(),"Topic b");
+			Topic t1 = new Topic((int) System.currentTimeMillis(),"Topic a");
+			Topic t2 = new Topic((int) System.currentTimeMillis(),"Topic b");
 			topics.add(t1);
 			topics.add(t2);
 		}
@@ -50,7 +50,7 @@ public class TopicService {
 	public List<Topic> createTopic(@RequestBody Topic topic, @PathVariable("lid") long lId, HttpSession session) {
 		Lesson lesson = lessonService.findLessonById(lId, session);
 		topics = lesson.getTopics();
-		topic.setId(System.currentTimeMillis());
+		topic.setId((int)System.currentTimeMillis());
 		topics.add(topic);
 		return topics;
 	}
@@ -87,7 +87,7 @@ public class TopicService {
 	}
 
 	@PutMapping("/api/topic/{tid}")
-	public Topic updateTopic(@PathVariable("tid") long tId, @RequestBody Topic topic, HttpSession session) {
+	public Topic updateTopic(@PathVariable("tid") int tId, @RequestBody Topic topic, HttpSession session) {
 		List<Course> courses = new ArrayList<Course>(courseService.findAllCourses(session));
 		List<Module> modules = new ArrayList<Module>();
 		List<Lesson> lessons = new ArrayList<Lesson>();

@@ -39,16 +39,16 @@ public class CourseService {
 		}
 		if (courses.isEmpty()) {
 			long ctr =0;
-			Course c1 = new Course(System.currentTimeMillis() +ctr, "cs5610");
+			Course c1 = new Course((int) (System.currentTimeMillis() +ctr), "cs5610");
 			//Course c2 = new Course(System.currentTimeMillis() , "cs5200");
 			
 			
-			Module m1 = new Module(System.currentTimeMillis() +ctr+1, "Module 1");
-			Module m2 = new Module(System.currentTimeMillis() +ctr+2, "Module 2");
-			Lesson l1 = new Lesson(System.currentTimeMillis() +ctr+3, "Lesson 1");
-			Lesson l2 = new Lesson(System.currentTimeMillis() +ctr+4, "Lesson 2");
-			Topic t1 = new Topic(System.currentTimeMillis() +ctr+5,"Topic a");
-			Topic t2 = new Topic(System.currentTimeMillis() +ctr+6,"Topic b");
+			Module m1 = new Module((int) (System.currentTimeMillis() +ctr+1), "Module 1");
+			Module m2 = new Module((int) (System.currentTimeMillis() +ctr+2), "Module 2");
+			Lesson l1 = new Lesson((int) (System.currentTimeMillis() +ctr+3), "Lesson 1");
+			Lesson l2 = new Lesson((int) (System.currentTimeMillis() +ctr+4), "Lesson 2");
+			Topic t1 = new Topic((int) (System.currentTimeMillis() +ctr+5),"Topic a");
+			Topic t2 = new Topic((int) (System.currentTimeMillis() +ctr+6),"Topic b");
 			List<Module> module1 = new ArrayList<Module>();
 			
 			List<Topic> topics1 = new ArrayList<Topic>();
@@ -88,7 +88,7 @@ public class CourseService {
 	public Course createCourse(@RequestBody Course course, HttpSession session) {
 		try
 		{
-		course.setId(System.currentTimeMillis());
+		course.setId((int)System.currentTimeMillis());
 		User currentUser = (User)session.getAttribute("currentUser");
 		if(currentUser!=null)
 		{
@@ -97,12 +97,12 @@ public class CourseService {
 		
 		//courses = currentUser.getCourses();
 		long ctr =0;
-		Module m1 = new Module(System.currentTimeMillis() +ctr+1, "Module 1");
-		Module m2 = new Module(System.currentTimeMillis() +ctr+2, "Module 2");
-		Lesson l1 = new Lesson(System.currentTimeMillis() +ctr+3, "Lesson 1");
-		Lesson l2 = new Lesson(System.currentTimeMillis() +ctr+4, "Lesson 2");
-		Topic t1 = new Topic(System.currentTimeMillis() +ctr+5,"Topic a");
-		Topic t2 = new Topic(System.currentTimeMillis() +ctr+6,"Topic b");
+		Module m1 = new Module((int) (System.currentTimeMillis() +ctr+1), "Module 1");
+		Module m2 = new Module((int) (System.currentTimeMillis() +ctr+2), "Module 2");
+		Lesson l1 = new Lesson((int) (System.currentTimeMillis() +ctr+3), "Lesson 1");
+		Lesson l2 = new Lesson((int) (System.currentTimeMillis() +ctr+4), "Lesson 2");
+		Topic t1 = new Topic((int) (System.currentTimeMillis() +ctr+5),"Topic a");
+		Topic t2 = new Topic((int) (System.currentTimeMillis() +ctr+6),"Topic b");
 		List<Module> module1 = new ArrayList<Module>();
 		
 		List<Topic> topics1 = new ArrayList<Topic>();
@@ -160,7 +160,7 @@ public class CourseService {
 
 	/* Updates course whose id is cid */
 	@PutMapping("/api/course/{cid}")
-	public Course updateCourse(@PathVariable("cid") long cid, @RequestBody Course course, HttpSession session) {
+	public Course updateCourse(@PathVariable("cid") int cid, @RequestBody Course course, HttpSession session) {
 		User currentUser = (User) session.getAttribute("currentUser");
 		courses = currentUser.getCourses();
 		int ctr = 0;

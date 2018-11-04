@@ -32,8 +32,8 @@ public class LessonService {
 	public List<Lesson> findLessonsForModule(@PathVariable("mId") long mId, HttpSession session) {
 		Module module = moduleService.findModuleById(mId, session);
 		if (lessons.isEmpty()) {
-			Lesson l1 = new Lesson(System.currentTimeMillis(), "Lesson 1");
-			Lesson l2 = new Lesson(System.currentTimeMillis(), "Lesson 2");
+			Lesson l1 = new Lesson((int) System.currentTimeMillis(), "Lesson 1");
+			Lesson l2 = new Lesson((int) System.currentTimeMillis(), "Lesson 2");
 			TopicService t1 =  new TopicService();
 			t1.findAllTopics(l1.getId(), session);
 		
@@ -52,7 +52,7 @@ public class LessonService {
 	public List<Lesson> createModule(@RequestBody Lesson lesson, @PathVariable("mId") long mId, HttpSession session) {
 		Module module = moduleService.findModuleById(mId, session);
 		lessons = module.getLessons();
-		lesson.setId(System.currentTimeMillis());
+		lesson.setId((int) System.currentTimeMillis());
 		lessons.add(lesson);
 		return lessons;
 	}

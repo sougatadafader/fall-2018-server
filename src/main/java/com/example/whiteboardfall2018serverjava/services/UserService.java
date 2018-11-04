@@ -28,11 +28,11 @@ public class UserService {
 	
 	/*Return a user with user.id equal to id parameter*/
 	@GetMapping("/api/user/{id}")
-	public User findUserById(@PathVariable ("id") String id) {
+	public User findUserById(@PathVariable ("id") int id) {
 		User reqdUser = null;
 		for(User u : users)
 		{
-			if(u.getUserId().equals(id))
+			if(u.getUserId()==(id))
 			{
 				reqdUser = u;
 			}
@@ -57,8 +57,8 @@ public class UserService {
 				return null;
 			}
 		}
-		String uId= System.currentTimeMillis()+"";
-		user.setUserId(uId);
+		
+		user.setUserId((int)System.currentTimeMillis());
 		session.setAttribute("currentUser", user);
 		users.add(user);
 		return user;
