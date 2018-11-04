@@ -1,5 +1,17 @@
 package com.example.whiteboardfall2018serverjava.models;
 
-public class ImageWidget {
+import javax.persistence.Entity;
+
+@Entity
+public class ImageWidget extends Widget{
+	private String options;
+
+	public String getOptions() {
+		return options;
+	}
+
+	public void setOptions(String options) {
+		this.options = options;
+	}
 
 }
