@@ -40,7 +40,7 @@ public class Topic {
 	public Topic() {
 	}
 	
-	public List<Widget> getWidget() {
+	public List<Widget> getWidgets() {
 		return widget;
 	}
 

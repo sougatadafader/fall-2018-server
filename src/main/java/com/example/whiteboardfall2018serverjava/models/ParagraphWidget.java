@@ -4,14 +4,11 @@ import javax.persistence.Entity;
 
 @Entity
 public class ParagraphWidget extends Widget{
-	private String options;
-
-	public String getOptions() {
-		return options;
-	}
-
-	public void setOptions(String options) {
-		this.options = options;
+	private String text;
+	
+	public void update(ParagraphWidget paragraphWidget) {
+		this.title = paragraphWidget.title != null ? paragraphWidget.title : this.title;
+		this.text = paragraphWidget.text != null ? paragraphWidget.text : this.text;
 	}
 
 }

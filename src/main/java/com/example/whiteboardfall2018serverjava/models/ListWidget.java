@@ -22,5 +22,9 @@ public class ListWidget extends Widget{
 	public void setItems(String items) {
 		this.items = items;
 	}
-
+	
+	public void update(ListWidget listWidget) {
+		this.title = listWidget.title != null ? listWidget.title : this.title;
+		this.listType = listWidget.listType != null ? listWidget.listType : this.listType;
+	}
 }

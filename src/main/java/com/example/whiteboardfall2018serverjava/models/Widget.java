@@ -13,7 +13,8 @@ public class Widget {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
-	private String title;
+	protected String title;
+	private String widgetType;
 	
 	@ManyToOne
 	@JsonIgnore
@@ -48,6 +49,14 @@ public class Widget {
 
 	public void setTitle(String title) {
 		this.title = title;
+	}
+
+	public String getWidgetType() {
+		return widgetType;
+	}
+
+	public void setWidgetType(String widgetType) {
+		this.widgetType = widgetType;
 	}
 
 }

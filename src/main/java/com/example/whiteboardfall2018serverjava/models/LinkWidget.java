@@ -22,4 +22,9 @@ public class LinkWidget extends Widget{
 	public void setLinkText(String linkText) {
 		this.linkText = linkText;
 	}
+	
+	public void update(LinkWidget linkWidget) {
+		this.title = linkWidget.title != null ? linkWidget.title : this.title;
+		this.src = linkWidget.src != null ? linkWidget.src : this.src;
+	}
 }

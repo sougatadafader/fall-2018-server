@@ -13,5 +13,10 @@ public class ImageWidget extends Widget{
 	public void setSrc(String src) {
 		this.src = src;
 	}
+	
+	public void update(ImageWidget imageWidget) {
+		this.title = imageWidget.title != null ? imageWidget.title : this.title;
+		this.src = imageWidget.src != null ? imageWidget.src : this.src;
+	}
 
 }
