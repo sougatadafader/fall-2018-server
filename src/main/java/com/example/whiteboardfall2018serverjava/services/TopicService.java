@@ -30,6 +30,8 @@ public class TopicService {
 	TopicRepository topicRepository;
 	@Autowired
 	LessonRepository lessonRepository;
+	@Autowired
+	LessonService lessonService;
 	
 	@GetMapping("/api/lesson/{lid}/topic")
 	public List<Topic> findTopicsForLesson(@PathVariable("lid") int lessonId) {
@@ -42,8 +44,8 @@ public class TopicService {
 	}
 	
 	@PostMapping("/api/lesson/{lid}/topic")
-	public Topic createTopic(@RequestBody Topic topic, @PathVariable("lid") int lId) {
-	
+	public Topic createTopic(@RequestBody Topic topic, @PathVariable("lid") int lId,HttpSession session) {
+		topic.setLesson(lessonService.findLessonById(lId, session));
 		return topicRepository.save(topic);
 	}
 	

@@ -24,6 +24,12 @@ public class Lesson {
 	@JsonIgnore
 	private Module module;
 	
+	public Module getModule() {
+		return module;
+	}
+	public void setModule(Module module) {
+		this.module = module;
+	}
 	@OneToMany(mappedBy="lesson",cascade=CascadeType.ALL,orphanRemoval=true)
 	private List<Topic> topics = new ArrayList<Topic>();
 

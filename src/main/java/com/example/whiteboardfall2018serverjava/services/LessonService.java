@@ -37,8 +37,9 @@ public class LessonService {
 		return lessons;
 	}
 	
-	@PostMapping("/api/lesson")
-	public Lesson createLesson(@RequestBody Lesson lesson,HttpSession session) {
+	@PostMapping("/api/module/{mId}/lesson")
+	public Lesson createLesson(@RequestBody Lesson lesson, @PathVariable("mId") int mId,HttpSession session) {
+		lesson.setModule(moduleService.findModuleById(mId, session));
 		return lessonRepository.save(lesson);
 	}
 	

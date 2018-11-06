@@ -23,6 +23,13 @@ public class Topic {
 	@JsonIgnore
 	private Lesson lesson;
 	
+	public Lesson getLesson() {
+		return lesson;
+	}
+
+	public void setLesson(Lesson lesson) {
+		this.lesson = lesson;
+	}
 	@OneToMany(mappedBy="topic",cascade=CascadeType.ALL,orphanRemoval=true)
 	private List<Widget> widget;
 

@@ -39,8 +39,9 @@ public class ModuleService {
 		return modules;
 	}
 	
-	@PostMapping("/api/module")
-	public Module createModule(@RequestBody Module module,HttpSession session) {
+	@PostMapping("/api/course/{courseId}/module")
+	public Module createModule(@PathVariable("courseId") int courseId,@RequestBody Module module,HttpSession session) {
+		module.setCourse(courseService.findCourseById(courseId, session));
 		return moduleRepository.save(module);
 	}
 	
