@@ -25,12 +25,17 @@ public class Course {
 		@JsonIgnore
 		private User user;
 	  
-	  @OneToMany(mappedBy="course",cascade=CascadeType.ALL,orphanRemoval=true)
+	  public User getUser() {
+		return user;
+	}
+	public void setUser(User user) {
+		this.user = user;
+	}
+	@OneToMany(mappedBy="course",cascade=CascadeType.ALL,orphanRemoval=true)
 	  private List<Module> modules = new ArrayList<Module>();
 	  
-	public Course(int i, String string) {
-		setId(i);
-		setTitle(string);
+	public Course(String string) {
+		this.title = string;
 	}
 	public Course() {}
 	public long getId() {
@@ -50,6 +55,10 @@ public class Course {
 	}
 	public void setModules(List<Module> modules) {
 		this.modules = modules;
+	}
+	public void update(Course course) {
+		this.title = course.title != null ? course.title : this.title;
+		this.modules = course.modules != null ? course.modules : this.modules;
 	}
 	  
 }

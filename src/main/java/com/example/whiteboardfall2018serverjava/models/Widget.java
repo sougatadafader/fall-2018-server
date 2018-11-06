@@ -19,15 +19,14 @@ public class Widget {
 	@JsonIgnore
 	private Topic topic;
 
-	public Widget(int i, String string) {
-		id = i;
-		title = string;
+	public Widget( String string) {
+		this.title = string;
 	}
 
 	public Widget() {
 	}
 
-	public long getId() {
+	public int getId() {
 		return id;
 	}
 

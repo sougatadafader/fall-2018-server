@@ -22,6 +22,12 @@ public class User {
 	
 	@OneToMany(mappedBy="user",cascade=CascadeType.ALL,orphanRemoval=true)
 	private List<Course> courses = new ArrayList<Course>();
+	
+//	public User(String user) {
+//		this.username
+//		
+//	}
+	
 	public int getUserId() {
 		
 		return id;

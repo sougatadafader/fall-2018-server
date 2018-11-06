@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,11 +16,84 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.whiteboardfall2018serverjava.models.User;
 
+
+import com.example.whiteboardfall2018serverjava.models.Course;
+import com.example.whiteboardfall2018serverjava.models.Lesson;
+import com.example.whiteboardfall2018serverjava.models.Module;
+import com.example.whiteboardfall2018serverjava.models.Topic;
+
+import com.example.whiteboardfall2018serverjava.models.Widget;
+import com.example.whiteboardfall2018serverjava.repositories.UserRepository;
+
 @RestController
 @CrossOrigin(origins = "*" , allowCredentials = "true" , allowedHeaders = "*")
 public class UserService {
 	
 	List<User> users = new ArrayList<User>();
+	@Autowired
+	UserRepository userRepository;
+	
+	static String[] usernames    = {"alice", "bob", "charlie"};
+	static String[] courseTitles = {"cs5200", "cs5610", "cs5500"};
+	static String[] moduleTitles = {"Module 1", "Module 2"};
+	static String[] lessonTitles = {"lesson 1", "lesson 2"};
+	static String[] topicTitles = {"topic 1", "topic 2"};
+	static String[] widgetTitles = {"widget 1", "widget 2"};
+	{
+		List<Widget> widgets = new ArrayList<Widget>();
+		for(String widgetTitle : widgetTitles) {
+			widgets.add(new Widget(widgetTitle));
+		}
+		List<Topic> topics = new ArrayList<Topic>();
+		for(String topicTitle : topicTitles) {
+			Topic topic = new Topic(topicTitle);
+			if(topicTitle.equals("topic 1")) {
+				topic.setWidgets(widgets);
+			}
+			topics.add(topic);
+		}
+		List<Lesson> lessons = new ArrayList<Lesson>();
+		for(String lessonTitle : lessonTitles) {
+			Lesson lesson = new Lesson(lessonTitle);
+			if(lessonTitle.equals("lesson 1")) {
+				lesson.setTopics(topics);
+			}
+			lessons.add(lesson);
+		}
+		List<Module> modules = new ArrayList<Module>();
+		for(String moduleTitle: moduleTitles) {
+			Module module = new Module(moduleTitle);
+			if(moduleTitle.equals("Module 1")) {
+				module.setLessons(lessons);
+			}
+			modules.add(module);
+		}
+		List<Course> courses = new ArrayList<Course>();
+		for(String courseTitle: courseTitles) {
+			Course course = new Course(courseTitle);
+			if(courseTitle.equals("cs5200")) {
+				course.setModules(modules);
+			}
+			courses.add(course);
+		}
+		for(String username: usernames) {
+			User u = new User();
+			u.setUserId((int)(Math.random() * Integer.MAX_VALUE));
+			u.setUsername(username);
+			if(!username.isEmpty())
+			{
+				u.setCourses(courses);
+			}
+//			User user = new User(username);
+//			if(username.equals("alice")) {
+//				user.setCourses(courses);
+//			}
+			users.add(u);
+		}
+	}
+	
+	
+	
 	/*Return a list of all the users*/
 	@GetMapping("/api/user")
 	public List<User> findAllUsers() {
@@ -46,20 +120,19 @@ public class UserService {
 	and make the user the current user */
 	
 	@PostMapping("/api/register")
-	public User register(
-			@RequestBody User user,
-			HttpSession session) {
+	public User register( @RequestBody User user,HttpSession session) {
 		
+	
 		for(User u : users)
 		{
+			System.out.println(user.getFirstName());
 			if(u.getUsername().equals(user.getUsername()))
 			{
 				return null;
 			}
 		}
-		
-		user.setUserId((int)System.currentTimeMillis());
 		session.setAttribute("currentUser", user);
+		userRepository.save(user);
 		users.add(user);
 		return user;
 	}

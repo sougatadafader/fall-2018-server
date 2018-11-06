@@ -27,8 +27,8 @@ public class Module {
 	  @OneToMany(mappedBy="module",cascade=CascadeType.ALL,orphanRemoval=true)
 	  private List<Lesson> lessons = new ArrayList<Lesson>();
 	  
-	public Module(int i, String string) {
-		id = i; title = string;
+	public Module(String string) {
+		this.title = string;
 	}
 	public Module() {}
 	public int getId() {
@@ -49,5 +49,10 @@ public class Module {
 	public void setTitle(String title) {
 		this.title = title;
 	}
+	public void update(Module m) {
+		this.title = m.title != null ? m.title : this.title;
+		this.lessons = m.lessons != null ? m.lessons : this.lessons;
+	}
+	  
 	  
 }

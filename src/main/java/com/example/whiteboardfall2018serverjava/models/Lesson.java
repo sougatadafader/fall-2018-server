@@ -34,9 +34,8 @@ public class Lesson {
 		this.topics = topics;
 	}
 
-	public Lesson(int i, String string) {
-		id = i;
-		title = string;
+	public Lesson(String string) {
+		this.title = string;
 	}
 
 	public Lesson() {
@@ -56,6 +55,12 @@ public class Lesson {
 
 	public void setTitle(String title) {
 		this.title = title;
+	}
+	public void update(Lesson lesson) {
+		// TODO Auto-generated method stub
+		this.title = lesson.title != null ? lesson.title : this.title;
+		this.topics = lesson.topics != null ? lesson.topics : this.topics;
+		
 	}
 
 }

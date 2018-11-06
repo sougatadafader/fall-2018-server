@@ -4,14 +4,14 @@ import javax.persistence.Entity;
 
 @Entity
 public class ImageWidget extends Widget{
-	private String options;
+	private String src;
 
-	public String getOptions() {
-		return options;
+	public String getSrc() {
+		return src;
 	}
 
-	public void setOptions(String options) {
-		this.options = options;
+	public void setSrc(String src) {
+		this.src = src;
 	}
 
 }

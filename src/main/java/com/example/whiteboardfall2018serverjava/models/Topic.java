@@ -26,9 +26,8 @@ public class Topic {
 	@OneToMany(mappedBy="topic",cascade=CascadeType.ALL,orphanRemoval=true)
 	private List<Widget> widget;
 
-	public Topic(int i, String string) {
-		id = i;
-		title = string;
+	public Topic(String string) {
+		this.title = string;
 	}
 
 	public Topic() {
@@ -38,7 +37,7 @@ public class Topic {
 		return widget;
 	}
 
-	public void setWidget(List<Widget> widget) {
+	public void setWidgets(List<Widget> widget) {
 		this.widget = widget;
 	}
 
@@ -56,6 +55,10 @@ public class Topic {
 
 	public void setTitle(String title) {
 		this.title = title;
+	}
+	public void update(Topic topic) {
+		this.title = topic.title != null ? topic.title : this.title;
+		this.widget = topic.widget != null ? topic.widget : this.widget;
 	}
 
 }

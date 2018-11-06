@@ -4,14 +4,14 @@ import javax.persistence.Entity;
 
 @Entity
 public class HeadingWidget extends Widget{
-	private String options;
+	private String size;
 
-	public String getOptions() {
-		return options;
+	public String Size() {
+		return size;
 	}
 
-	public void setOptions(String options) {
-		this.options = options;
+	public void setOptions(String size) {
+		this.size = size;
 	}
 
 }
