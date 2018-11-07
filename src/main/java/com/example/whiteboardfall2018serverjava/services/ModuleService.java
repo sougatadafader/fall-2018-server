@@ -26,6 +26,7 @@ import com.example.whiteboardfall2018serverjava.repositories.ModuleRepository;
 @CrossOrigin(origins = "*" , allowCredentials = "true" , allowedHeaders = "*")
 public class ModuleService {
 	
+	List<Module> modules = new ArrayList<Module>();
 	
 	@Autowired
 	ModuleRepository moduleRepository;
@@ -35,7 +36,7 @@ public class ModuleService {
 	@GetMapping("/api/course/{courseId}/module")
 	public List<Module> findModulesForCourse(@PathVariable("courseId") int courseId,HttpSession session) {
 		Course c = courseService.findCourseById(courseId,session);
-		List<Module> modules= c.getModules();
+		modules= c.getModules();
 		return modules;
 	}
 	
@@ -52,6 +53,13 @@ public class ModuleService {
 		if(reqdModule.isPresent())
 		{
 			module =  reqdModule.get();
+		}
+		else {
+			for (Module m : modules) {
+				if (m.getId() == mid) {
+					module = m;
+				}
+			}
 		}
 		return module;
 	}

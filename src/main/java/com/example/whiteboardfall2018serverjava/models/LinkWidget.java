@@ -26,5 +26,6 @@ public class LinkWidget extends Widget{
 	public void update(LinkWidget linkWidget) {
 		this.title = linkWidget.title != null ? linkWidget.title : this.title;
 		this.src = linkWidget.src != null ? linkWidget.src : this.src;
+		this.linkText = linkWidget.linkText != null ? linkWidget.linkText : this.linkText;
 	}
 }

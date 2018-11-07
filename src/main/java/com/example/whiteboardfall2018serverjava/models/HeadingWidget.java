@@ -12,8 +12,19 @@ public class HeadingWidget extends Widget{
 		return size;
 	}
 
-	public void setOptions(String size) {
+	public void setSize(String size) {
 		this.size = size;
+	}
+	public String getSize() {
+		return this.size;
+	}
+	
+	public String getText() {
+		return text;
+	}
+
+	public void setText(String text) {
+		this.text = text;
 	}
 	
 	public void update(HeadingWidget headingWidget) {
@@ -22,12 +33,6 @@ public class HeadingWidget extends Widget{
 		this.text = headingWidget.text != null ? headingWidget.text : this.text;
 	}
 
-	public String getText() {
-		return text;
-	}
-
-	public void setText(String text) {
-		this.text = text;
-	}
+	
 
 }

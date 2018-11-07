@@ -1,5 +1,6 @@
 package com.example.whiteboardfall2018serverjava.models;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -31,7 +32,7 @@ public class Topic {
 		this.lesson = lesson;
 	}
 	@OneToMany(mappedBy="topic",cascade=CascadeType.ALL,orphanRemoval=true)
-	private List<Widget> widget;
+	private List<Widget> widget= new ArrayList<Widget>();
 
 	public Topic(String string) {
 		this.title = string;

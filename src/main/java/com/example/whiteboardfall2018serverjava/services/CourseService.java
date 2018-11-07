@@ -29,23 +29,25 @@ import com.example.whiteboardfall2018serverjava.repositories.CourseRepository;
 @CrossOrigin(origins = "*" , allowCredentials = "true" , allowedHeaders = "*")
 public class CourseService {
 	
-	
+	List<Course> courses = new ArrayList<Course>();
 	@Autowired
 	CourseRepository courseRepository;
 	
 	@GetMapping("/api/course")
 	public List<Course> findAllCourses(HttpSession session) {
-		Iterable<Course> courses = courseRepository.findAll();
-		List<Course> courseList = new ArrayList<Course>();
-	    for (Course c:courses) {
-	    	courseList.add(c);
-	    }
-		
-		return courseList;
+		//Iterable<Course> courses = courseRepository.findAll();
+		User currentUser = (User)session.getAttribute("currentUser");
+		if(currentUser==null)
+		{
+			return null;
+		}
+		courses = currentUser.getCourses();
+		return courses;
 	}
 	
 	@PostMapping("/api/course")
 	public Course createCourse(@RequestBody Course course,HttpSession session) {
+		
 		course.setUser((User)session.getAttribute("currentUser"));
 		return courseRepository.save(course);
 	}
@@ -57,6 +59,13 @@ public class CourseService {
 		if(reqdCourse.isPresent())
 		{
 			course =  reqdCourse.get();
+		}
+		else {
+			for (Course c : courses) {
+				if (c.getId() == id) {
+					course = c;
+				}
+			}
 		}
 		return course;
 	}

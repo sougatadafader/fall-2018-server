@@ -32,6 +32,7 @@ public class User {
 		
 		return id;
 	}
+	
 	public void setUserId(int userId) {
 		
 		this.id = userId;

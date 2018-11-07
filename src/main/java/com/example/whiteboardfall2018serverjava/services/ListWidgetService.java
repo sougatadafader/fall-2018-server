@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.whiteboardfall2018serverjava.models.Course;
 import com.example.whiteboardfall2018serverjava.models.ListWidget;
 import com.example.whiteboardfall2018serverjava.models.Topic;
 import com.example.whiteboardfall2018serverjava.models.Widget;

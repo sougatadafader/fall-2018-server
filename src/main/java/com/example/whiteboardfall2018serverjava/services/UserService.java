@@ -39,14 +39,17 @@ public class UserService {
 	static String[] lessonTitles = {"lesson 1", "lesson 2"};
 	static String[] topicTitles = {"topic 1", "topic 2"};
 	static String[] widgetTitles = {"widget 1", "widget 2"};
-	{
+	/*{
 		List<Widget> widgets = new ArrayList<Widget>();
 		for(String widgetTitle : widgetTitles) {
-			widgets.add(new Widget(widgetTitle));
+			Widget widget = new Widget(widgetTitle);
+			widget.setId((int)(Math.random() * Integer.MAX_VALUE));
+			widgets.add(widget);
 		}
 		List<Topic> topics = new ArrayList<Topic>();
 		for(String topicTitle : topicTitles) {
 			Topic topic = new Topic(topicTitle);
+			topic.setId((int)(Math.random() * Integer.MAX_VALUE));
 			if(topicTitle.equals("topic 1")) {
 				topic.setWidgets(widgets);
 			}
@@ -55,6 +58,7 @@ public class UserService {
 		List<Lesson> lessons = new ArrayList<Lesson>();
 		for(String lessonTitle : lessonTitles) {
 			Lesson lesson = new Lesson(lessonTitle);
+			lesson.setId((int)(Math.random() * Integer.MAX_VALUE));
 			if(lessonTitle.equals("lesson 1")) {
 				lesson.setTopics(topics);
 			}
@@ -63,6 +67,7 @@ public class UserService {
 		List<Module> modules = new ArrayList<Module>();
 		for(String moduleTitle: moduleTitles) {
 			Module module = new Module(moduleTitle);
+			module.setId((int)(Math.random() * Integer.MAX_VALUE));
 			if(moduleTitle.equals("Module 1")) {
 				module.setLessons(lessons);
 			}
@@ -71,6 +76,7 @@ public class UserService {
 		List<Course> courses = new ArrayList<Course>();
 		for(String courseTitle: courseTitles) {
 			Course course = new Course(courseTitle);
+			course.setId((int)(Math.random() * Integer.MAX_VALUE));
 			if(courseTitle.equals("cs5200")) {
 				course.setModules(modules);
 			}
@@ -80,24 +86,22 @@ public class UserService {
 			User u = new User();
 			u.setUserId((int)(Math.random() * Integer.MAX_VALUE));
 			u.setUsername(username);
+			u.setPassword("1234");
 			if(!username.isEmpty())
 			{
 				u.setCourses(courses);
 			}
-//			User user = new User(username);
-//			if(username.equals("alice")) {
-//				user.setCourses(courses);
-//			}
 			users.add(u);
 		}
-	}
+	}*/
 	
 	
 	
 	/*Return a list of all the users*/
 	@GetMapping("/api/user")
 	public List<User> findAllUsers() {
-		return users;
+		return (List<User>)userRepository.findAll();
+		
 	}
 	
 	/*Return a user with user.id equal to id parameter*/
@@ -157,9 +161,10 @@ public class UserService {
 	public User login(
 			@RequestBody User credentials,
 			HttpSession session) {
+		users= (List<User>) userRepository.findAll();
 	 for (User user : users) {
-	  if( user.getUsername().equals(credentials.getUsername())
-	   && user.getPassword().equals(credentials.getPassword())) {
+	  if( user.getUsername().equalsIgnoreCase(credentials.getUsername())
+	   && user.getPassword().equalsIgnoreCase(credentials.getPassword())) {
 	    session.setAttribute("currentUser", user);
 	    return user;
 	  }
