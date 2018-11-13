@@ -16,7 +16,7 @@ import com.example.whiteboardfall2018serverjava.models.Widget;
 import com.example.whiteboardfall2018serverjava.repositories.WidgetRepository;
 
 @RestController
-@CrossOrigin(origins="*")
+@CrossOrigin(origins="*", allowCredentials = "true" , allowedHeaders = "*")
 public class WidgetService {
 	
 	@Autowired
@@ -25,7 +25,7 @@ public class WidgetService {
 	@Autowired
 	TopicService topicService;
 	
-	@GetMapping("/api/topic/{topicId}/widget/")
+	@GetMapping("/api/topic/{topicId}/widget")
 	public List<Widget> findAllWidgets(@PathVariable("topicId") int topicId,HttpSession session){
 		Topic t = topicService.findTopicById(topicId);
 		return t.getWidgets();
