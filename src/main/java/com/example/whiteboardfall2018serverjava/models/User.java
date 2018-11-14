@@ -67,4 +67,10 @@ public class User {
 	public void setCourses(List<Course> courses) {
 		this.courses = courses;
 	}
+	public void update(User user) {
+		this.username = user.username != null ?  user.username : this.username;
+		this.password = user.password != null ? user.password : this.password;
+		this.firstName = user.firstName != null ?  user.firstName : this.firstName;
+		this.lastName = user.lastName != null ? user.lastName : this.lastName;
+	}
 }
