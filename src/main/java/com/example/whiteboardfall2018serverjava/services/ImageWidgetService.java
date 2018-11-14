@@ -22,7 +22,7 @@ import com.example.whiteboardfall2018serverjava.repositories.ParagraphWidgetRepo
 import com.example.whiteboardfall2018serverjava.repositories.TopicRepository;
 
 @RestController
-@CrossOrigin(origins="*")
+@CrossOrigin(origins="*", allowCredentials = "true" , allowedHeaders = "*")
 public class ImageWidgetService {
 	@Autowired
 	TopicRepository topicRepository;

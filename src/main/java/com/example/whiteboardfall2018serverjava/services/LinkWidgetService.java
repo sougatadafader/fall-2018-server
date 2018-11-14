@@ -22,7 +22,7 @@ import com.example.whiteboardfall2018serverjava.repositories.LinkWidgetRepositor
 import com.example.whiteboardfall2018serverjava.repositories.TopicRepository;
 
 @RestController
-@CrossOrigin(origins="*")
+@CrossOrigin(origins="*", allowCredentials = "true" , allowedHeaders = "*")
 public class LinkWidgetService {
 	@Autowired
 	TopicRepository topicRepository;
