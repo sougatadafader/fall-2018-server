@@ -64,7 +64,7 @@ public class HeadingWidgetService {
 	}
 	
 	@DeleteMapping("/api/heading/widget/{wid}")
-	public void deleteLinkWidget(
+	public void deleteHeadingWidget(
 			@PathVariable("wid") int wid,
 			HttpSession session) {
 		headingWidgetRepository.deleteById(wid);
