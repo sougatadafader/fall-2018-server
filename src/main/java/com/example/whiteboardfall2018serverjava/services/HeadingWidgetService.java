@@ -63,7 +63,7 @@ public class HeadingWidgetService {
 		return headingWidgetRepository.save(hw);
 	}
 	
-	@DeleteMapping("/api/heading/widget/{wid}")
+	@DeleteMapping("/api/HEADING/widget/{wid}")
 	public void deleteHeadingWidget(
 			@PathVariable("wid") int wid,
 			HttpSession session) {
