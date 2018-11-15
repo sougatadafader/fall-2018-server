@@ -15,9 +15,11 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.whiteboardfall2018serverjava.models.ImageWidget;
 import com.example.whiteboardfall2018serverjava.models.ParagraphWidget;
 import com.example.whiteboardfall2018serverjava.models.Topic;
 import com.example.whiteboardfall2018serverjava.models.Widget;
+import com.example.whiteboardfall2018serverjava.repositories.ImageWidgetRepository;
 import com.example.whiteboardfall2018serverjava.repositories.ParagraphWidgetRepository;
 import com.example.whiteboardfall2018serverjava.repositories.TopicRepository;
 
@@ -27,45 +29,45 @@ public class ImageWidgetService {
 	@Autowired
 	TopicRepository topicRepository;
 	@Autowired
-	ParagraphWidgetRepository paragraphWidgetRepository;
-	@PostMapping("/api/topic/{topicId}/widget/image")
+	ImageWidgetRepository imageWidgetRepository;
+	@PostMapping("/api/topic/{topicId}/widget/IMAGE")
 	
 	public List<Widget> createParagraphWidget(
 			@PathVariable("topicId") int topicId,
-			@RequestBody ParagraphWidget paragraphWidget) {
-		paragraphWidget.setWidgetType("PARAGRAPH");
+			@RequestBody ImageWidget iWidget) {
+		iWidget.setWidgetType("PARAGRAPH");
 		Topic topic = topicRepository.findById(topicId).get();
-		paragraphWidget.setTopic(topic);
-		paragraphWidget = paragraphWidgetRepository.save(paragraphWidget);
+		iWidget.setTopic(topic);
+		iWidget = imageWidgetRepository.save(iWidget);
 		return topicRepository.findById(topicId).get().getWidgets();
 	}
 	
-	@GetMapping("/api/image/widget/{wid}")
-	public ParagraphWidget findWidgetById(@PathVariable("wid") int wid,HttpSession session) {
-		ParagraphWidget pWidget = null;
-		Optional<ParagraphWidget> reqdWidget = paragraphWidgetRepository.findById(wid);
+	@GetMapping("/api/IMAGE/widget/{wid}")
+	public ImageWidget findWidgetById(@PathVariable("wid") int wid,HttpSession session) {
+		ImageWidget iWidget = null;
+		Optional<ImageWidget> reqdWidget = imageWidgetRepository.findById(wid);
 		if(reqdWidget.isPresent())
 		{
-			pWidget =  reqdWidget.get();
+			iWidget =  reqdWidget.get();
 		}
-		return pWidget;
+		return iWidget;
 	}
 
-	@PutMapping("/api/image/widget/{wid}")
-	public ParagraphWidget updateParagraphWidget(
+	@PutMapping("/api/IMAGE/widget/{wid}")
+	public ImageWidget updateImageWidget(
 			@PathVariable("wid") int wid,
-			@RequestBody ParagraphWidget paragraphWidget,
+			@RequestBody ImageWidget imageWidget,
 			HttpSession session) {
 		
-		ParagraphWidget pw =  findWidgetById(wid,session);
-		pw.update(paragraphWidget);
-		return paragraphWidgetRepository.save(pw);
+		ImageWidget i =  findWidgetById(wid,session);
+		i.update(imageWidget);
+		return imageWidgetRepository.save(i);
 	}
 	
-	@DeleteMapping("/api/image/widget/{wid}")
-	public void deleteLinkWidget(
+	@DeleteMapping("/api/IMAGE/widget/{wid}")
+	public void deleteImageWidget(
 			@PathVariable("wid") int wid,
 			HttpSession session) {
-		paragraphWidgetRepository.deleteById(wid);
+		imageWidgetRepository.deleteById(wid);
 	}
 }

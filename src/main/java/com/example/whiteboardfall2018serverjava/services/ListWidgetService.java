@@ -28,7 +28,7 @@ public class ListWidgetService {
 	TopicRepository topicRepository;
 	@Autowired
 	ListWidgetRepository listWidgetRepository;
-	@PostMapping("/api/topic/{topicId}/widget/list")
+	@PostMapping("/api/topic/{topicId}/widget/LIST")
 	
 	public List<Widget> createListWidget(
 			@PathVariable("topicId") int topicId,
@@ -40,7 +40,7 @@ public class ListWidgetService {
 		return topicRepository.findById(topicId).get().getWidgets();
 	}
 	
-	@GetMapping("/api/list/widget/{wid}")
+	@GetMapping("/api/LIST/widget/{wid}")
 	public ListWidget findWidgetById(@PathVariable("wid") int wid,HttpSession session) {
 		ListWidget lWidget = null;
 		Optional<ListWidget> reqdWidget = listWidgetRepository.findById(wid);
@@ -52,7 +52,7 @@ public class ListWidgetService {
 		return lWidget;
 	}
 
-	@PutMapping("/api/list/widget/{wid}")
+	@PutMapping("/api/LIST/widget/{wid}")
 	public ListWidget updateListWidget(
 			@PathVariable("wid") int wid,
 			@RequestBody ListWidget listWidget,
@@ -63,7 +63,7 @@ public class ListWidgetService {
 		return listWidgetRepository.save(lw);
 	}
 	
-	@DeleteMapping("/api/list/widget/{wid}")
+	@DeleteMapping("/api/LIST/widget/{wid}")
 	public void deleteListWidget(
 			@PathVariable("wid") int wid,
 			HttpSession session) {

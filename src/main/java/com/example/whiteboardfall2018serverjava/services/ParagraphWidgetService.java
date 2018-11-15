@@ -28,7 +28,7 @@ public class ParagraphWidgetService {
 	TopicRepository topicRepository;
 	@Autowired
 	ParagraphWidgetRepository paragraphWidgetRepository;
-	@PostMapping("/api/topic/{topicId}/widget/paragraph")
+	@PostMapping("/api/topic/{topicId}/widget/PARAGRAPH")
 	
 	public List<Widget> createParagraphWidget(
 			@PathVariable("topicId") int topicId,
@@ -40,7 +40,7 @@ public class ParagraphWidgetService {
 		return topicRepository.findById(topicId).get().getWidgets();
 	}
 	
-	@GetMapping("/api/paragraph/widget/{wid}")
+	@GetMapping("/api/PARAGRAPH/widget/{wid}")
 	public ParagraphWidget findWidgetById(@PathVariable("wid") int wid,HttpSession session) {
 		ParagraphWidget pWidget = null;
 		Optional<ParagraphWidget> reqdWidget = paragraphWidgetRepository.findById(wid);
@@ -52,7 +52,7 @@ public class ParagraphWidgetService {
 		return pWidget;
 	}
 
-	@PutMapping("/api/paragraph/widget/{wid}")
+	@PutMapping("/api/PARAGRAPH/widget/{wid}")
 	public ParagraphWidget updateParagraphWidget(
 			@PathVariable("wid") int wid,
 			@RequestBody ParagraphWidget paragraphWidget,
@@ -63,8 +63,8 @@ public class ParagraphWidgetService {
 		return paragraphWidgetRepository.save(pw);
 	}
 	
-	@DeleteMapping("/api/paragraph/widget/{wid}")
-	public void deleteLinkWidget(
+	@DeleteMapping("/api/PARAGRAPH/widget/{wid}")
+	public void deleteParagraphWidget(
 			@PathVariable("wid") int wid,
 			HttpSession session) {
 		paragraphWidgetRepository.deleteById(wid);

@@ -28,7 +28,7 @@ public class LinkWidgetService {
 	TopicRepository topicRepository;
 	@Autowired
 	LinkWidgetRepository linkWidgetRepository;
-	@PostMapping("/api/topic/{topicId}/widget/link")
+	@PostMapping("/api/topic/{topicId}/widget/LINK")
 	
 	public List<Widget> createLinkWidget(
 			@PathVariable("topicId") int topicId,
@@ -40,7 +40,7 @@ public class LinkWidgetService {
 		return topicRepository.findById(topicId).get().getWidgets();
 	}
 	
-	@GetMapping("/api/link/widget/{wid}")
+	@GetMapping("/api/LINK/widget/{wid}")
 	public LinkWidget findWidgetById(@PathVariable("wid") int wid,HttpSession session) {
 		LinkWidget lWidget = null;
 		Optional<LinkWidget> reqdWidget = linkWidgetRepository.findById(wid);
@@ -52,7 +52,7 @@ public class LinkWidgetService {
 		return lWidget;
 	}
 
-	@PutMapping("/api/link/widget/{wid}")
+	@PutMapping("/api/LINK/widget/{wid}")
 	public LinkWidget updateLinkWidget(
 			@PathVariable("wid") int wid,
 			@RequestBody LinkWidget linkWidget,
@@ -63,14 +63,11 @@ public class LinkWidgetService {
 		return linkWidgetRepository.save(lw);
 	}
 	
-	@DeleteMapping("/api/link/widget/{wid}")
+	@DeleteMapping("/api/LINK/widget/{wid}")
 	public void deleteLinkWidget(
 			@PathVariable("wid") int wid,
 			HttpSession session) {
 		
 	 linkWidgetRepository.deleteById(wid);
 	}
-	
-	
-	
 }

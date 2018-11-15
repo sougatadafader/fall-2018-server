@@ -28,7 +28,7 @@ public class HeadingWidgetService {
 	TopicRepository topicRepository;
 	@Autowired
 	HeadingWidgetRepository headingWidgetRepository;
-	@PostMapping("/api/topic/{topicId}/widget/heading")
+	@PostMapping("/api/topic/{topicId}/widget/HEADING")
 	
 	public List<Widget> createHeadingWidget(
 			@PathVariable("topicId") int topicId,
@@ -40,7 +40,7 @@ public class HeadingWidgetService {
 		return topicRepository.findById(topicId).get().getWidgets();
 	}
 	
-	@GetMapping("/api/heading/widget/{wid}")
+	@GetMapping("/api/HEADING/widget/{wid}")
 	public HeadingWidget findWidgetById(@PathVariable("wid") int wid,HttpSession session) {
 		HeadingWidget hWidget = null;
 		Optional<HeadingWidget> reqdWidget = headingWidgetRepository.findById(wid);
@@ -52,7 +52,7 @@ public class HeadingWidgetService {
 		return hWidget;
 	}
 
-	@PutMapping("/api/heading/widget/{wid}")
+	@PutMapping("/api/HEADING/widget/{wid}")
 	public HeadingWidget updateHeadingWidget(
 			@PathVariable("wid") int wid,
 			@RequestBody HeadingWidget headingWidget,
