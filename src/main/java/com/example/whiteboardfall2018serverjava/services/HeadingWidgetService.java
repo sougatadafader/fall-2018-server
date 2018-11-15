@@ -63,12 +63,10 @@ public class HeadingWidgetService {
 		return headingWidgetRepository.save(hw);
 	}
 	
-	@DeleteMapping("/api/{topicId}/HEADING/widget/{wid}")
-	public List<Widget> deleteHeadingWidget(
-			@PathVariable("topicId") int topicId,
+	@DeleteMapping("/api/HEADING/widget/{wid}")
+	public void deleteHeadingWidget(
 			@PathVariable("wid") int wid,
 			HttpSession session) {
 		headingWidgetRepository.deleteById(wid);
-		return topicRepository.findById(topicId).get().getWidgets();
 	}
 }
