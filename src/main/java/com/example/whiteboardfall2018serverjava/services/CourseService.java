@@ -33,8 +33,15 @@ public class CourseService {
 	@Autowired
 	CourseRepository courseRepository;
 	
+	@GetMapping("/api/courses")
+	public Iterable<Course> findAllCourses() {
+		
+		return courseRepository.findAll();
+
+	}
+	
 	@GetMapping("/api/course")
-	public List<Course> findAllCourses(HttpSession session) {
+	public List<Course> findAllCourse(HttpSession session) {
 		//Iterable<Course> courses = courseRepository.findAll();
 		User currentUser = (User)session.getAttribute("currentUser");
 		if(currentUser==null)
