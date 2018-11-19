@@ -32,10 +32,10 @@ public class ImageWidgetService {
 	ImageWidgetRepository imageWidgetRepository;
 	@PostMapping("/api/topic/{topicId}/widget/IMAGE")
 	
-	public List<Widget> createParagraphWidget(
+	public List<Widget> createImageWidget(
 			@PathVariable("topicId") int topicId,
 			@RequestBody ImageWidget iWidget) {
-		iWidget.setWidgetType("PARAGRAPH");
+		iWidget.setWidgetType("IMAGE");
 		Topic topic = topicRepository.findById(topicId).get();
 		iWidget.setTopic(topic);
 		iWidget = imageWidgetRepository.save(iWidget);

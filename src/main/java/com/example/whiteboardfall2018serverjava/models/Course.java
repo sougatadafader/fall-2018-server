@@ -1,6 +1,7 @@
 package com.example.whiteboardfall2018serverjava.models;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -10,6 +11,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -21,19 +24,25 @@ public class Course {
 	  private int id;
 	  private String title;
 	  
-	  @ManyToOne
-		@JsonIgnore
+	@ManyToOne
+	@JsonIgnore
 		private User user;
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date created;
+	
+	public Date getCreated() {
+		return created;
+	}
+	
+	@OneToMany(mappedBy="course",cascade=CascadeType.ALL,orphanRemoval=true)
+	  private List<Module> modules = new ArrayList<Module>();
 	  
-	  public User getUser() {
+	public User getUser() {
 		return user;
 	}
 	public void setUser(User user) {
 		this.user = user;
 	}
-	@OneToMany(mappedBy="course",cascade=CascadeType.ALL,orphanRemoval=true)
-	  private List<Module> modules = new ArrayList<Module>();
-	  
 	public Course(String string) {
 		this.title = string;
 	}

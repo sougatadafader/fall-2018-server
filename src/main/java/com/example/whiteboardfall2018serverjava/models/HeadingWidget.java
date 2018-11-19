@@ -15,6 +15,7 @@ public class HeadingWidget extends Widget{
 	public void setSize(String size) {
 		this.size = size;
 	}
+	
 	public String getSize() {
 		return this.size;
 	}
