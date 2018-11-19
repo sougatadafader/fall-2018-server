@@ -26,10 +26,18 @@ public class WidgetService {
 	TopicService topicService;
 	
 	@GetMapping("/api/topic/{topicId}/widget")
-	public List<Widget> findAllWidgets(@PathVariable("topicId") int topicId,HttpSession session){
+	public List<Widget> findWidgetsForTopic(@PathVariable("topicId") int topicId,HttpSession session){
 		Topic t = topicService.findTopicById(topicId);
 		return t.getWidgets();
 	}
 	
+	@GetMapping("/api/widget/{wid}")
+	public Optional<Widget> findWidgetById(@PathVariable("wid") int wid,HttpSession session){
+		return widgetRepository.findById(wid);
+	}
 	
+	@GetMapping("/api/widgets")
+	public List<Widget> findAllWidgets(){
+		return (List<Widget>) widgetRepository.findAll();
+	}
 }

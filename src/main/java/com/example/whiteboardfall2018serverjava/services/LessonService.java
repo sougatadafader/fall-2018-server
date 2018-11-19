@@ -29,6 +29,10 @@ public class LessonService {
 	LessonRepository lessonRepository;
 	@Autowired
 	ModuleService moduleService;
+	@GetMapping("/api/lessons")
+	public List<Lesson> findAllLessons(HttpSession session) {
+		return (List<Lesson>)lessonRepository.findAll();
+	}
 	
 	@GetMapping("/api/module/{mId}/lesson")
 	public List<Lesson> findLessonsForModule(@PathVariable("mId") int mId,HttpSession session) {

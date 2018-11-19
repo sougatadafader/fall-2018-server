@@ -33,6 +33,11 @@ public class ModuleService {
 	@Autowired
 	CourseService courseService;
 	
+	@GetMapping("/api/modules")
+	public List<Module> findAllModules(HttpSession session) {
+		return (List<Module>)moduleRepository.findAll();
+	}
+	
 	@GetMapping("/api/course/{courseId}/module")
 	public List<Module> findModulesForCourse(@PathVariable("courseId") int courseId,HttpSession session) {
 		Course c = courseService.findCourseById(courseId,session);
